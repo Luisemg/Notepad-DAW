@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotesComponent implements OnInit {
 
+  msg: string = '';
+  author: string = 'Anonimo';
+  messages: string[] = [];
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addMessage() {
+    this.messages.push(this.msg);
+    this.msg = '';
   }
 
 }
