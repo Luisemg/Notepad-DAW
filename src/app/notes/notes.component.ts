@@ -49,6 +49,10 @@ export class NotesComponent implements OnInit {
 
     this.note = '';
     this._data.changeNote(this.notes);
-  }
-
+    this.refresh()
+  } 
+  
+    refresh(): void {
+      window.location.reload();
+    }
 }

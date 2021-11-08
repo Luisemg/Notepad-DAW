@@ -33,7 +33,7 @@ const NOTESPARAM = gql`
 `;
 const CREATENOTE = gql`
   mutation CreateNote($user: String!, $description: String!) {
-    createLink(user: $user, description: $description) {
+    createNote(user: $user, description: $description) {
       id
       user
       description
