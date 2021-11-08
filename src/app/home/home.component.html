@@ -8,11 +8,11 @@
     <div class="col">
         <h3>Sign up or Get your Token:</h3>
         <form>
-            <input type="text" class="txt" name="user" placeholder="Name..." [(ngModel)]="name">
+            <input type="text" class="txt" name="user" placeholder="Name..." [(ngModel)]="user">
+            <input type="password" class="pwd" name="password" placeholder="Password..." [(ngModel)]="pass">
             <input type="text" class="txt" name="email" placeholder="Email...">
-            <input type="password" class="pwd" name="password" placeholder="Password...">
             <input type="submit" class="btn" value="Sign Up">
-            <input type="submit" class="btn" value="Get Token" (click)="getToken()">
+            <input type="submit" class="btn" value="Get Token" (click)="loginUser()">
         </form>
     </div>
     <div class="col">

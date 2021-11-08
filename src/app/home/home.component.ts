@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GraphqlProductsService} from '../graphql.products.service';
 import { Subscription } from 'rxjs';
 import { GraphqlUsersService} from '../graphql.users.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-home',
@@ -10,17 +11,41 @@ import { GraphqlUsersService} from '../graphql.users.service';
 })
 export class HomeComponent implements OnInit {
 
-  token: string = '';
   name: string = '';
+  user: string = '';
+  pass: string = '';
+  token: string = '';
 
-  constructor() { }
+  notes: Array<any> = [];
 
-  ngOnInit(): void {
+  loading: boolean = false;
+  private querySubscription: Subscription = new Subscription();  
+
+  constructor(private _data: DataService,
+              private graphqlProductsService: GraphqlProductsService,
+              private graphqlUsersService : GraphqlUsersService) { }
+
+  ngOnInit() {
+    this.querySubscription = this.graphqlProductsService.notes("-")
+      .valueChanges
+      .subscribe(({ data, loading }) => {
+        this.loading = loading;
+        this.notes = JSON.parse(JSON.stringify(data)).notes;
+        console.log(JSON.stringify(this.notes))
+      });    
   }
 
-  getToken() {
-    this.token = '';
-    this.name = '';
-  }
+  loginUser() {
+
+    alert(this.user + " - " + this.pass);
+    this.graphqlUsersService.tokenAuth(this.user, this.pass)
+    .subscribe(({ data }) => {
+      console.log('logged: ', JSON.stringify(data));
+      this.token =  JSON.parse(JSON.stringify(data)).tokenAuth.token;
+    }, (error) => {
+       console.log('there was an error sending the query', error);
+    });
+  
+  } 
 
 }

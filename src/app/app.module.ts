@@ -9,6 +9,7 @@ import { NotesComponent } from './notes/notes.component';
 import { AboutComponent } from './about/about.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     GraphQLModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -75,7 +75,7 @@ export class GraphqlProductsService  {
   }
  
  createNote(mytoken: string, user: string, description: string) {
-       console.log("token auth = " + mytoken);
+      console.log("token auth = " + mytoken);
       return this.apollo.mutate({
         mutation: CREATENOTE,
         variables: {
