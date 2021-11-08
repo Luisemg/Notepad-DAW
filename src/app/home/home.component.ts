@@ -11,7 +11,7 @@ import { DataService } from '../data.service';
 })
 export class HomeComponent implements OnInit {
 
-  name: string = '';
+  email: string = '';
   user: string = '';
   pass: string = '';
   token: string = '';
@@ -35,6 +35,29 @@ export class HomeComponent implements OnInit {
       });    
   }
 
+  alertUser() {
+
+    alert(this.user + " - " + this.pass + " Enter your credentials again to get the TOKEN");
+    this.graphqlUsersService.tokenAuth(this.user, this.pass)
+    .subscribe(({ data }) => {
+      console.log('User created: ', JSON.stringify(data));
+      this.token =  JSON.parse(JSON.stringify(data)).tokenAuth.token;
+    }, (error) => {
+       console.log('there was an error sending the query', error);
+    });
+    this.graphqlUsersService.createUser(this.user,this.email,this.pass )
+    .subscribe(({ data }) => {
+       console.log('User created :  ', data);
+    }, (error) => {
+       console.log('there was an error sending the query', error);
+    });
+    this.refresh()
+} 
+
+  refresh(): void {
+    window.location.reload();
+  }
+
   loginUser() {
 
     alert(this.user + " - " + this.pass);
@@ -46,6 +69,13 @@ export class HomeComponent implements OnInit {
        console.log('there was an error sending the query', error);
     });
   
+    this.graphqlUsersService.createUser(this.user,this.email,this.pass )
+    .subscribe(({ data }) => {
+       console.log('User created :  ', data);
+    }, (error) => {
+       console.log('there was an error sending the query', error);
+    });
+
   } 
 
 }
