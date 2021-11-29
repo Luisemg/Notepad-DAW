@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
 
 import { FormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +9,11 @@ import { NotesComponent } from './notes/notes.component';
 import { AboutComponent } from './about/about.component';
 import { CameraComponent } from './camera/camera.component';
 import { CameraModule } from './camera/camera.module';
+
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './data.service';
+
 
 @NgModule({
   declarations: [
@@ -23,9 +27,10 @@ import { CameraModule } from './camera/camera.module';
     AppRoutingModule,
     FormsModule,
     CameraModule,
+    GraphQLModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

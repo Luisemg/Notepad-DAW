@@ -4,7 +4,7 @@
     </h2>
     <div class="row">
         <form>
-            <input type="text" class="txt" name="note" placeholder="Thoughts..." [(ngModel)]="msg">
+            <input type="text" class="txt" name="note" placeholder="Thoughts..." [(ngModel)]="note">
             <input type="submit" class="btn" value="Add Note" (click)="addMessage()">
         </form>
     </div>
@@ -12,11 +12,11 @@
 
 <h2 class="h2">Notes:</h2>
 
-<div class="container color-light" *ngFor="let message of messages.slice().reverse()">
+<div class="container color-light" *ngFor="let note of notes.slice().reverse()">
     <div class="row1">
-        {{ message }}
+        {{ note.description }}
     </div>
     <div class="row2">
-        By: {{ author }}
+        By: {{note.user}}
     </div>
 </div>
