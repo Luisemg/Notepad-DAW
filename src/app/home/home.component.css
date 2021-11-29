@@ -46,4 +46,6 @@ input.btn {
     padding: .5em;
     font-weight: bold;
     cursor: pointer;
+    width: 90%;
+    height: auto;
 }
