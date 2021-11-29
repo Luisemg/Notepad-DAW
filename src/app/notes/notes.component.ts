@@ -25,7 +25,7 @@ export class NotesComponent implements OnInit, OnDestroy {
 
   notes: Array<any> = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private data: DataService,
+  constructor(private route: ActivatedRoute, private router: Router, private _data: DataService,
               private graphqlProductsService: GraphqlProductsService) {
     // this.route.params.subscribe( res => console.log(res.id)); 
   }
@@ -38,10 +38,12 @@ export class NotesComponent implements OnInit, OnDestroy {
         this.notes = JSON.parse(JSON.stringify(data)).notes;
         console.log(JSON.stringify(this.notes))
       });  
-    this.subscription=this.data.currentToken.subscribe(token => this.token = JSON.parse(JSON.stringify(token)).subscription);
-    this.subscriptionUser=this.data.currentUser.subscribe(user => this.user = JSON.parse(JSON.stringify(user)).subscriptionUser);
     console.log(JSON.stringify(this.token));
     console.log(JSON.stringify(this.user));
+    //this.subscription=this._data.currentToken.subscribe(token => this.token = token);
+    //this.subscriptionUser=this._data.currentUser.subscribe(user => this.user = user);
+    //console.log(this.token);
+    //console.log(this.user)
   }
 
   addMessage() {
@@ -49,6 +51,10 @@ export class NotesComponent implements OnInit, OnDestroy {
     
     alert(this.note);
 
+    this.subscription=this._data.currentToken.subscribe(token => this.token = token);
+    this.subscriptionUser=this._data.currentUser.subscribe(user => this.user = user);
+    console.log(this.token);
+    console.log(this.user);
     this.graphqlProductsService.createNote(this.token, this.user, this.note)
     .subscribe(({ data }) => {
        console.log('Note created :  ', data);
@@ -57,7 +63,7 @@ export class NotesComponent implements OnInit, OnDestroy {
     });
 
     this.note = '';
-    this.data.changeNote(this.notes);
+    this._data.changeNote(this.notes);
     this.refresh()
   } 
 
