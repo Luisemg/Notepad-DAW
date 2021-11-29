@@ -56,11 +56,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
     this.refresh()
 } 
-
   refresh(): void {
     window.location.reload();
   }
-
   loginUser() {
 
     alert(this.user + " - " + this.pass);
